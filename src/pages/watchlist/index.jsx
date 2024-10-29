@@ -8,10 +8,15 @@ import { useState, useEffect } from "react";
 
 import { Moviegenres } from "./genreList";
 import { ALL_GENRES } from "./genreList";
+import { useDebounce } from "../../hooks/Debounce";
+
 
 const Watchlist = ({ movies, removeFromWatchlist }) => {
   const [uniqueGenres, setUniqueGenres] = useState([ALL_GENRES]);
   const [selectedGenre, setSelectedGenre] = useState(ALL_GENRES);
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
+  
 
   useEffect(() => {
     const genreSet = new Set();
@@ -28,7 +33,7 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-8 mt-6 mb-10 cursor-pointer">
+      <div className="flex flex-wrap items-center justify-center gap-8 mt-6 mb-10 cursor-pointer">
         {uniqueGenres.map((genre, index) => (
           <div
             key={index}
@@ -44,9 +49,13 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
       </div>
       <div className="flex items-center justify-center m-8">
         <input
+        value={search}
           className="bg-slate-200 p-3 enabled:hover:bg-slate-300 transition duration-300 transform hover:scale-110 disabled:opacity-75 w-[20rem] text-black outline-none"
           type="text"
           placeholder="Search Movie"
+          onChange={(e)=> {
+            setSearch(e.target.value)
+          }}
         />
       </div>
       <div className="flex items-center justify-center">
@@ -55,7 +64,7 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
             <tr className="text-left border-b-[1px]">
               <th className="pl-12">Name</th>
               <th className="flex gap-1 items-center pt-3">
-                <FontAwesomeIcon icon={faArrowUp} className="cursor-pointer" />
+                <FontAwesomeIcon onClick={() => movies.sort((a,b) =>  a.vote_average - b.vote_average)} icon={faArrowUp} className="cursor-pointer" />
                 <span>Ratings</span>
                 <FontAwesomeIcon icon={faArrowDown} className="cursor-pointer" />
               </th>
@@ -76,6 +85,9 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
                     return genre ? genre.name : null;
                   });
                   return movieGenres.includes(selectedGenre);
+                })
+                .filter((movieObj) => {
+                  return movieObj.title.toLowerCase().includes(debouncedSearch.toLowerCase());
                 })
                 .map((movie) => {
                   const movieGenres = movie.genre_ids
