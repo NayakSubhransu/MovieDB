@@ -38,7 +38,7 @@ function App() {
       <Darkmode />
       <Routes>
         <Route path="/" element={<Homepage watchlist={watchlist} addToWatchlist={addToWatchlist} removeFromWatchlist={removeFromWatchlist} />} />
-        <Route path="/watch-list" element={<Watchlist movies={watchlist} removeFromWatchlist={removeFromWatchlist} />} />
+        <Route path="/watch-list" element={<Watchlist movies={watchlist} removeFromWatchlist={removeFromWatchlist} setWatchlist ={setWatchlist} />} />
       </Routes>
     </>
   );

@@ -10,13 +10,24 @@ import { Moviegenres } from "./genreList";
 import { ALL_GENRES } from "./genreList";
 import { useDebounce } from "../../hooks/Debounce";
 
-
-const Watchlist = ({ movies, removeFromWatchlist }) => {
+const Watchlist = ({ movies, removeFromWatchlist, setWatchlist }) => {
   const [uniqueGenres, setUniqueGenres] = useState([ALL_GENRES]);
   const [selectedGenre, setSelectedGenre] = useState(ALL_GENRES);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
-  
+
+  const sortAscending = () => {
+    const sortedMovies = [...movies].sort((a, b) => {
+      return a.vote_average - b.vote_average;
+    });
+    setWatchlist(sortedMovies);
+  };
+  const sortDecending = () => {
+    const sortedMovies = [...movies].sort((a, b) => {
+      return  b.vote_average-a.vote_average;
+    });
+    setWatchlist(sortedMovies);
+  };
 
   useEffect(() => {
     const genreSet = new Set();
@@ -49,12 +60,12 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
       </div>
       <div className="flex items-center justify-center m-8">
         <input
-        value={search}
+          value={search}
           className="bg-slate-200 p-3 enabled:hover:bg-slate-300 transition duration-300 transform hover:scale-110 disabled:opacity-75 w-[20rem] text-black outline-none"
           type="text"
           placeholder="Search Movie"
-          onChange={(e)=> {
-            setSearch(e.target.value)
+          onChange={(e) => {
+            setSearch(e.target.value);
           }}
         />
       </div>
@@ -64,9 +75,17 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
             <tr className="text-left border-b-[1px]">
               <th className="pl-12">Name</th>
               <th className="flex gap-1 items-center pt-3">
-                <FontAwesomeIcon onClick={() => movies.sort((a,b) =>  a.vote_average - b.vote_average)} icon={faArrowUp} className="cursor-pointer" />
+                <FontAwesomeIcon
+                  onClick={() => sortDecending('vote_average')}
+                  icon={faArrowUp}
+                  className="cursor-pointer"
+                />
                 <span>Ratings</span>
-                <FontAwesomeIcon icon={faArrowDown} className="cursor-pointer" />
+                <FontAwesomeIcon
+                  onClick={() =>  sortAscending('vote_average')}
+                  icon={faArrowDown}
+                  className="cursor-pointer"
+                />
               </th>
               <th>Release Date</th>
               <th>Genre</th>
@@ -77,7 +96,6 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
             {Array.isArray(movies) &&
               movies
                 .filter((movie) => {
-                  
                   if (selectedGenre === ALL_GENRES) return true;
 
                   const movieGenres = movie.genre_ids.map((id) => {
@@ -87,18 +105,25 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
                   return movieGenres.includes(selectedGenre);
                 })
                 .filter((movieObj) => {
-                  return movieObj.title.toLowerCase().includes(debouncedSearch.toLowerCase());
+                  return movieObj.title
+                    .toLowerCase()
+                    .includes(debouncedSearch.toLowerCase());
                 })
                 .map((movie) => {
                   const movieGenres = movie.genre_ids
                     .map((id) => {
-                      const genre = Moviegenres.find((genre) => genre.id === id);
+                      const genre = Moviegenres.find(
+                        (genre) => genre.id === id
+                      );
                       return genre ? genre.name : "Unknown Genre";
                     })
                     .join(", ");
 
                   return (
-                    <tr key={movie.id} className="border-b-[1px] hover:bg-zinc-100">
+                    <tr
+                      key={movie.id}
+                      className="border-b-[1px] hover:bg-zinc-100"
+                    >
                       <td className="flex gap-2 items-center p-4">
                         <img
                           className="h-[120px] w-[180px] rounded-lg"
@@ -109,7 +134,19 @@ const Watchlist = ({ movies, removeFromWatchlist }) => {
                       </td>
                       <td className="pl-5">{movie.vote_average}</td>
                       <td>{movie.release_date}</td>
-                      <td>{movieGenres}</td>
+                      <td className="text-center">
+                        {movieGenres.split(", ").map((genre, i, arr) => (
+                          <span
+                            key={i}
+                            className="text-center flex"
+                          >
+                            {genre}
+                            {i < arr.length - 1 && ","}{" "}
+                            
+                          </span>
+                        ))}
+                      </td>
+
                       <td className="text-rose-500 cursor-pointer">
                         <FontAwesomeIcon
                           onClick={() => removeFromWatchlist(movie)}

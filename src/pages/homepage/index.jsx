@@ -79,6 +79,7 @@ const Homepage = (
       targetRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [page]);
+  
 
   return (
     <>
@@ -88,7 +89,7 @@ const Homepage = (
         nextCategory={nextCategory}
         prevCategory={prevCategory}
       />
-      <div ref={targetRef} className="flex flex-wrap justify-evenly gap-3">
+      <div ref={targetRef} className="flex flex-wrap justify-around mr-6 ml-6 gap-2">
         {movies.map((movie) => (
           <Moviecard
             key={movie.id}
@@ -98,6 +99,7 @@ const Homepage = (
             removeFromWatchlist={removeFromWatchlist}
             title={movie.title}
             imgURL={movie.backdrop_path}
+            rating={movie.vote_average}
           />
         ))}
       </div>
