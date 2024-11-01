@@ -1,8 +1,11 @@
 
 
+import { useContext } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import PaginationContext from '../../context/paginationContext';
 
-const Pagination = ({ page, nextPage, prevPage }) => {
+const Pagination = () => {
+  const {page,nextPage,prevPage} = useContext(PaginationContext);
   return (
     <div className="flex justify-center items-center h-[3.5rem] pt-2 mt-4 gap-3 bg-[#021e34]">
       <button 

@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import CategoryContext from "../../context/CategoryContext";
+
 const movielist = {
     1: "Trending",
     2: "Top Rated",
@@ -5,7 +8,12 @@ const movielist = {
     4: "Upcoming"
 };
 
-const Movielist = ({ curr, nextCategory, prevCategory }) => {
+const Movielist = ({ 
+    // curr, 
+    // nextCategory, 
+    // prevCategory 
+}) => {
+    const {curr,nextCategory,prevCategory} = useContext(CategoryContext)
     return (
         <div className="flex justify-center items-center gap-4 my-4">
             <img

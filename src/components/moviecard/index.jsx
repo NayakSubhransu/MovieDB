@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import MovieContext from "../../context/movieContext";
 
 const Moviecard = ({
   movie,
   fav,
-  addToWatchlist,
-  removeFromWatchlist,
+  // addToWatchlist,
+  // removeFromWatchlist,
   title,
   imgURL,
   rating,
 }) => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const {addToWatchlist, removeFromWatchlist} = useContext(MovieContext)
 
   const handleClick = (movie) => {
     setSelectedItem(movie);
@@ -21,7 +23,8 @@ const Moviecard = ({
   <div 
   className="relative hover:scale-110 duration-300 cursor-pointer ml-8 mr-8 m-4 rounded-[1rem] z-10 overflow-visible"
   onClick={() => handleClick(movie)}
-  onMouseLeave={handleMouseLeave}
+  onMouseLeave = {handleMouseLeave}
+  
 >
   {selectedItem && (
     <div 
@@ -70,14 +73,20 @@ const Moviecard = ({
       <div class=" absolute top-2 right-2">
         {fav ? (
           <img
-            onClick={() => removeFromWatchlist(movie)}
+            onClick={(e) =>{
+              e.stopPropagation()
+              removeFromWatchlist(movie)
+            } }
             className="h-10 "
             src="./public/star.png"
             alt="  Loading..."
           />
         ) : (
           <img
-            onClick={() => addToWatchlist(movie)}
+            onClick={(e) => {
+              e.stopPropagation()
+              addToWatchlist(movie)
+            } }
             className="h-8 "
             src="./public/cb.png"
             alt="Loading..."

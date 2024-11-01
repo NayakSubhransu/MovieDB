@@ -4,17 +4,24 @@ import {
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { Moviegenres } from "./genreList";
 import { ALL_GENRES } from "./genreList";
 import { useDebounce } from "../../hooks/Debounce";
+import MovieContext from "../../context/movieContext";
 
-const Watchlist = ({ movies, removeFromWatchlist, setWatchlist }) => {
+const Watchlist = ({ 
+  // movies, 
+  // removeFromWatchlist, 
+  // setWatchlist
+ }) => {
   const [uniqueGenres, setUniqueGenres] = useState([ALL_GENRES]);
   const [selectedGenre, setSelectedGenre] = useState(ALL_GENRES);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
+
+  const {watchlist:movies, removeFromWatchlist, setWatchlist} = useContext(MovieContext)
 
   const sortAscending = () => {
     const sortedMovies = [...movies].sort((a, b) => {
