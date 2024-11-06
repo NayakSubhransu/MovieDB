@@ -81,8 +81,8 @@ const Moviecard = ({
               e.stopPropagation()
              dispatch(actions. removeFromWatchlist(movie))
             } }
-            className="h-10 "
-            src="./public/star.png"
+            className="h-9 "
+            src="./public/v.png"
             alt="  Loading..."
           />
         ) : (
