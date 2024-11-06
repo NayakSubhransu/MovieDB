@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React, { Suspense } from "react";
 
 import { Moviegenres } from "./genreList";
 import { ALL_GENRES } from "./genreList";
@@ -77,6 +78,9 @@ const Watchlist = ({}) => {
           }}
         />
       </div>
+      <Suspense
+        fallback={<h1 className="text-center">Loading...</h1>}
+      >
       <div className="flex items-center justify-center">
         <table className="rounded-xl border-1 w-[90%] overflow-hidden">
           <thead className="bg-slate-900 h-12 w-full rounded-lg">
@@ -153,7 +157,7 @@ const Watchlist = ({}) => {
 
                       <td className="text-rose-500 cursor-pointer">
                         <FontAwesomeIcon
-                          onClick={() => removeFromWatchlist(movie)}
+                          onClick={() => dispatch(actions.removeFromWatchlist(movie))}
                           icon={faTrash}
                         />
                       </td>
@@ -163,6 +167,7 @@ const Watchlist = ({}) => {
           </tbody>
         </table>
       </div>
+      </Suspense>
     </>
   );
 };

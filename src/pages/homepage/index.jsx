@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React, {Suspense} from "react";
 
 //Components
-import Moviecard from "../../components/moviecard";
-import Banner from "../../components/banner";
-import Pagination from "../../components/pagination";
-import Movielist from "../../components/Movielist";
+const Banner = React.lazy(() => import("../../components/banner"));
+const Moviecard = React.lazy(() => import("../../components/moviecard"));
+const Pagination = React.lazy(() => import("../../components/pagination"));
+const Movielist = React.lazy(() => import("../../components/Movielist"));
 
 
 import moviesMiddleware from "../../redux/movie/moviesMiddleware";
@@ -25,7 +26,7 @@ const Homepage = () => {
 
   const { curr } = useSelector((store) => store.categoryState);
 
-  const { movies, loading, error } = useSelector((store) => store.movieState);
+  const { movies, error } = useSelector((store) => store.movieState);
   const dispatch = useDispatch();
 
   const watchlist = useSelector((state) => state.watchlistState);
@@ -52,7 +53,7 @@ const Homepage = () => {
   }
 
   return (
-    <>
+    <Suspense fallback={<h1 className="text-center">Loading...</h1>}>
       <Banner />
 
       <Movielist />
@@ -73,7 +74,7 @@ const Homepage = () => {
         ))}
       </div>
       <Pagination />
-    </>
+      </Suspense>
   );
 };
 
