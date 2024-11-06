@@ -1,5 +1,8 @@
-import { useContext } from "react";
-import CategoryContext from "../../context/CategoryContext";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+import { setPage } from "../../redux/paginationSlice";
+import categorySlice from "../../redux/categorySlice";
 
 const movielist = {
     1: "Trending",
@@ -8,23 +11,33 @@ const movielist = {
     4: "Upcoming"
 };
 
+const actions = categorySlice.actions;
+
+
 const Movielist = ({ 
-    // curr, 
-    // nextCategory, 
-    // prevCategory 
 }) => {
-    const {curr,nextCategory,prevCategory} = useContext(CategoryContext)
+    
+    const {curr} = useSelector((state) => state.categoryState);
+
+    const dispatch = useDispatch();
+
     return (
         <div className="flex justify-center items-center gap-4 my-4">
             <img
-                onClick={prevCategory}
+                onClick={() => {
+                    dispatch(setPage());
+                    dispatch(actions.prevCategory())
+                }}
                 className="h-10  hover: transition-transform transform hover:-translate-x-1 cursor-pointer"
                 src="./public/backArrow.png"
                 alt="Previous Category"
             />
             <p className="text-center text-6xl font-bold">{movielist[curr]}</p>
             <img
-                onClick={nextCategory}
+                onClick={() => {
+                    dispatch(setPage());
+                    dispatch(actions.nextCategory())
+                }}
                 className="h-10  hover: transition-transform transform hover:translate-x-1 cursor-pointer"
                 src="./public/frontArrow.png"
                 alt="Next Category"

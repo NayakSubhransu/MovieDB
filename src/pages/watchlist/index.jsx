@@ -4,36 +4,37 @@ import {
   faArrowUp,
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Moviegenres } from "./genreList";
 import { ALL_GENRES } from "./genreList";
 import { useDebounce } from "../../hooks/Debounce";
-import MovieContext from "../../context/movieContext";
 
-const Watchlist = ({ 
-  // movies, 
-  // removeFromWatchlist, 
-  // setWatchlist
- }) => {
+import watchlistSlice from "../../redux/movie/watchlistSlice";
+
+const actions = watchlistSlice.actions;
+
+const Watchlist = ({}) => {
   const [uniqueGenres, setUniqueGenres] = useState([ALL_GENRES]);
   const [selectedGenre, setSelectedGenre] = useState(ALL_GENRES);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
-
-  const {watchlist:movies, removeFromWatchlist, setWatchlist} = useContext(MovieContext)
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.watchlistState);
 
   const sortAscending = () => {
-    const sortedMovies = [...movies].sort((a, b) => {
-      return a.vote_average - b.vote_average;
-    });
-    setWatchlist(sortedMovies);
+    const sortedMovies = [...movies].sort(
+      (a, b) => a.vote_average - b.vote_average
+    );
+    dispatch(actions.setWatchlist(sortedMovies));
   };
-  const sortDecending = () => {
-    const sortedMovies = [...movies].sort((a, b) => {
-      return  b.vote_average-a.vote_average;
-    });
-    setWatchlist(sortedMovies);
+
+  const sortDescending = () => {
+    const sortedMovies = [...movies].sort(
+      (a, b) => b.vote_average - a.vote_average
+    );
+    dispatch(actions.setWatchlist(sortedMovies));
   };
 
   useEffect(() => {
@@ -83,13 +84,13 @@ const Watchlist = ({
               <th className="pl-12">Name</th>
               <th className="flex gap-1 items-center pt-3">
                 <FontAwesomeIcon
-                  onClick={() => sortDecending('vote_average')}
+                  onClick={() => sortDescending("vote_average")}
                   icon={faArrowUp}
                   className="cursor-pointer"
                 />
                 <span>Ratings</span>
                 <FontAwesomeIcon
-                  onClick={() =>  sortAscending('vote_average')}
+                  onClick={() => sortAscending("vote_average")}
                   icon={faArrowDown}
                   className="cursor-pointer"
                 />
@@ -143,13 +144,9 @@ const Watchlist = ({
                       <td>{movie.release_date}</td>
                       <td className="text-center">
                         {movieGenres.split(", ").map((genre, i, arr) => (
-                          <span
-                            key={i}
-                            className="text-center flex"
-                          >
+                          <span key={i} className="text-center flex">
                             {genre}
                             {i < arr.length - 1 && ","}{" "}
-                            
                           </span>
                         ))}
                       </td>

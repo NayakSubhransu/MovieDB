@@ -1,17 +1,19 @@
-import { useContext, useState } from "react";
-import MovieContext from "../../context/movieContext";
+import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import watchlistSlice from "../../redux/movie/watchlistSlice";
+
+const actions = watchlistSlice.actions;
 const Moviecard = ({
   movie,
   fav,
-  // addToWatchlist,
-  // removeFromWatchlist,
   title,
   imgURL,
   rating,
 }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const {addToWatchlist, removeFromWatchlist} = useContext(MovieContext)
+  const dispatch = useDispatch();
+
 
   const handleClick = (movie) => {
     setSelectedItem(movie);
@@ -41,20 +43,22 @@ const Moviecard = ({
         height:'60vh'
       }}
     >
+      <div className="relative h-full w-full p-4 flex flex-col">
       <img 
         src={`https://image.tmdb.org/t/p/original${imgURL}`} 
         alt="" 
-        className="rounded-lg w-full h-full opacity-55" 
+        className="rounded-lg w-full h-full opacity-50 object-cover absolute top-0 left-0"
       />
-      <div className="mt-2 ml-2 font-bold absolute text-lg top-[2px] left-[4px]">
+      <div className="relative z-10 font-bold text-lg mb-2">
         {movie.title}
       </div>
-      <div className="absolute top-[40px] left-2 pr-3 w-full h-full pl-2 text-xs text-wrap">
+      <div className="relative z-10 text-xs">
         {movie.overview}
       </div>
-      <div className="w-10 border-4 border-rose-900 absolute top-[-35px] left-4 rounded-[100%] p-2 text-sm bg-slate-900">
+      <div className="absolute z-20 top-[-15px] left-4 rounded-full bg-slate-900 p-2 text-sm border-4 border-rose-900">
           {Math.round(rating * 10) / 10}
         </div>
+    </div>
     </div>
   )}
       <img
@@ -75,7 +79,7 @@ const Moviecard = ({
           <img
             onClick={(e) =>{
               e.stopPropagation()
-              removeFromWatchlist(movie)
+             dispatch(actions. removeFromWatchlist(movie))
             } }
             className="h-10 "
             src="./public/star.png"
@@ -85,7 +89,7 @@ const Moviecard = ({
           <img
             onClick={(e) => {
               e.stopPropagation()
-              addToWatchlist(movie)
+              dispatch(actions.addToWatchlist(movie))
             } }
             className="h-8 "
             src="./public/cb.png"
