@@ -82,7 +82,7 @@ const Moviecard = ({
              dispatch(actions. removeFromWatchlist(movie))
             } }
             className="h-9 "
-            src="./public/v.png"
+            src="/v.png"
             alt="  Loading..."
           />
         ) : (
@@ -92,7 +92,7 @@ const Moviecard = ({
               dispatch(actions.addToWatchlist(movie))
             } }
             className="h-8 "
-            src="./public/cb.png"
+            src="/cb.png"
             alt="Loading..."
           />
         )}

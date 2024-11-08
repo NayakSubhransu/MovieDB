@@ -28,7 +28,7 @@ const Banner = () => {
                 {randomMovie.title || "Popular Movie"}
             </p>
             
-            <input className="absolute bottom-[150px] left-1/2 transform -translate-x-1/2 w-[80%] p-3 outline-none rounded-3xl bg-black pl-6 " type="text"  placeholder=" Search for a movie"/>
+            {/* <input className="absolute bottom-[150px] left-1/2 transform -translate-x-1/2 w-[80%] p-3 outline-none rounded-3xl bg-black pl-6 " type="text"  placeholder=" Search for a movie"/> */}
         </div>
     );
 };

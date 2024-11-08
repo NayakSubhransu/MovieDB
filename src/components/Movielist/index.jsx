@@ -29,7 +29,7 @@ const Movielist = ({
                     dispatch(actions.prevCategory())
                 }}
                 className="h-10  hover: transition-transform transform hover:-translate-x-1 cursor-pointer"
-                src="./public/backArrow.png"
+                src="/backArrow.png"
                 alt="Previous Category"
             />
             <p className="text-center text-6xl font-bold">{movielist[curr]}</p>
@@ -39,7 +39,7 @@ const Movielist = ({
                     dispatch(actions.nextCategory())
                 }}
                 className="h-10  hover: transition-transform transform hover:translate-x-1 cursor-pointer"
-                src="./public/frontArrow.png"
+                src="/frontArrow.png"
                 alt="Next Category"
             />
         </div>
