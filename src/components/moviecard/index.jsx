@@ -70,7 +70,7 @@ const Moviecard = ({
         <p className="text-center text-white text-lg p-2 whitespace-normal">
           {title}
         </p>
-        <div className="w-10 border-4 border-rose-900 absolute top-[-35px] left-4 rounded-[100%] p-2 text-sm bg-slate-900">
+        <div className="w-10 border-4 border-rose-900 absolute top-[-35px] left-4 rounded-[100%] p-2 text-sm bg-slate-900 text-center">
           {Math.round(rating * 10) / 10}
         </div>
       </div>
