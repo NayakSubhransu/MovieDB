@@ -53,7 +53,7 @@ const Watchlist = ({}) => {
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center gap-8 mt-6 mb-10 cursor-pointer">
+      <div className="flex flex-wrap items-center text-white-500 justify-center gap-8 mt-6 mb-10 cursor-pointer">
         {uniqueGenres.map((genre, index) => (
           <div
             key={index}
