@@ -17,7 +17,7 @@ const links = [
 
 const Navbar = () => {
     return (
-        <div className="flex item-center bg-[#021e34] " >
+        <div className="flex item-center bg-[#021e34] text-red-500 " >
             <img className="h-[50px] mt-3 mx-5" src="/cine.png" alt="TheMovieDB" />
             {links.map(link => (
                 <div key={link.path} className='flex font-bold text-3xl mt-3 mx-3 items-center gap-2'>
