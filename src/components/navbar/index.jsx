@@ -17,10 +17,10 @@ const links = [
 
 const Navbar = () => {
     return (
-        <div className="flex item-center bg-[#021e34] text-red-500 " >
+        <div className="flex item-center bg-[#021e34] text-white-500 " >
             <img className="h-[50px] mt-3 mx-5" src="/cine.png" alt="TheMovieDB" />
             {links.map(link => (
-                <div key={link.path} className='flex font-bold text-3xl mt-3 mx-3 items-center gap-2'>
+                <div key={link.path} className='flex font-bold text-white-500 text-3xl mt-3 mx-3 items-center gap-2'>
                    
                     <NavLink
                         to={link.path}
