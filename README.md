@@ -23,14 +23,14 @@ A modern, responsive web application for discovering, organizing, and managing y
 
 ## ✨ Features
 
-- ** Movie Discovery**: Browse trending movies with intuitive navigation
-- ** Advanced Search**: Find movies by title, genre, or release date
-- ** Smart Filtering**: Filter movies by genre, ratings, and release dates
-- ** Personal Watchlist**: Add and manage your favorite movies
-- ** Rating System**: View and track movie ratings
-- ** Responsive Design**: Seamless experience across all devices
-- ** Modern UI**: Clean, dark-themed interface with smooth animations
-- ** Fast Performance**: Optimized loading and smooth user interactions
+- **Movie Discovery**: Browse trending movies with intuitive navigation
+- **Advanced Search**: Find movies by title, genre, or release date
+- **Smart Filtering**: Filter movies by genre, ratings, and release dates
+- **Personal Watchlist**: Add and manage your favorite movies
+- **Rating System**: View and track movie ratings
+- **Responsive Design**: Seamless experience across all devices
+- **Modern UI**: Clean, dark-themed interface with smooth animations
+- **Fast Performance**: Optimized loading and smooth user interactions
 
 ## Demo
 
@@ -43,12 +43,14 @@ Experience the full functionality of MovieDB with real-time movie data and inter
 ### 🏠 Home Dashboard - "Discover Your Next Favorite Movie"
 *The main landing page showcasing trending movies with an elegant hero section featuring "War 2" and a curated selection of popular films.*
 
-![Home Dashboard](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Home+Dashboard)
+![Home Dashboard](<img width="965" height="571" alt="image" src="https://github.com/user-attachments/assets/2ed2927e-460f-4905-8f59-d3f6e4005423" />
+)
 
 ### 📋 Movie Library - "Your Complete Movie Collection at a Glance"
 *A comprehensive view of your movie database with advanced sorting, filtering options, and detailed movie information including ratings and release dates.*
 
-![Movie Library](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Movie+Library)
+![Movie Library](<img width="967" height="562" alt="image" src="https://github.com/user-attachments/assets/46564a0e-fa0b-4156-916d-2d86f422e38e" />
+)
 
 ## 🛠️ Technologies Used
 
