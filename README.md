@@ -43,14 +43,14 @@ Experience the full functionality of MovieDB with real-time movie data and inter
 ### 🏠 Home Dashboard - "Discover Your Next Favorite Movie"
 *The main landing page showcasing trending movies with an elegant hero section featuring "War 2" and a curated selection of popular films.*
 
-![Home Dashboard](<img width="965" height="571" alt="image" src="https://github.com/user-attachments/assets/2ed2927e-460f-4905-8f59-d3f6e4005423" />
-)
+<img width="965" height="571" alt="image" src="https://github.com/user-attachments/assets/2ed2927e-460f-4905-8f59-d3f6e4005423" />
+
 
 ### 📋 Movie Library - "Your Complete Movie Collection at a Glance"
 *A comprehensive view of your movie database with advanced sorting, filtering options, and detailed movie information including ratings and release dates.*
 
-![Movie Library](<img width="967" height="562" alt="image" src="https://github.com/user-attachments/assets/46564a0e-fa0b-4156-916d-2d86f422e38e" />
-)
+<img width="967" height="562" alt="image" src="https://github.com/user-attachments/assets/315787d7-6bc3-400c-9064-72b0e686c072" />
+
 
 ## 🛠️ Technologies Used
 
